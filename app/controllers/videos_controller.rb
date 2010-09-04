@@ -16,12 +16,20 @@ class VideosController < ApplicationController
   def show
     @video = Video.find(params[:id])
     if @video.delivery == 'send_file'
-      @video.url = "/videos/#{params[:id]}/sendfile.mp4"
+      @video.url = "#{params[:id]}.mp4"
     end
     
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @video }
+      format.mp4 do
+        send_file "#{Rails.root}/public/videos/#{@video.url}",
+        :filename => "not_a_secret.mp4",
+        :type => 'video/mp4',
+        :disposition => 'inline'
+      end
+  end
+
     end
   end
 
@@ -88,13 +96,10 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
     respond_to do |format|
       format.mp4 do
-        start=Time.now
         send_file "#{Rails.root}/public/videos/#{@video.url}",
         :filename => "not_a_secret.mp4",
         :type => 'video/mp4',
         :disposition => 'inline'
-        elapsed=Time.now-start
-        logger.info "send_file took #{elapsed} seconds"
       end
     end
   end
