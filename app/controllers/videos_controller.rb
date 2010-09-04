@@ -16,7 +16,7 @@ class VideosController < ApplicationController
   def show
     @video = Video.find(params[:id])
     if @video.delivery == 'send_file'
-      @video.url = "/videos/#{params[:id]}/sendfile"
+      @video.url = "/videos/#{params[:id]}/sendfile.mp4"
     end
     
     respond_to do |format|
@@ -86,6 +86,13 @@ class VideosController < ApplicationController
 
   def sendfile
     @video = Video.find(params[:id])
-    send_file "#{Rails.root}/public/videos/#{@video.url}"
+    respond_to do |format|
+      format.mp4 do
+        send_file "#{Rails.root}/public/videos/#{@video.url}",
+        :filename => "not_a_secret.mp4",
+        :type => 'video/mp4',
+        :disposition => 'inline'
+      end
+    end
   end
 end
