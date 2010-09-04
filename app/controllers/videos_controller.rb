@@ -88,10 +88,13 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
     respond_to do |format|
       format.mp4 do
+        start=Time.now
         send_file "#{Rails.root}/public/videos/#{@video.url}",
         :filename => "not_a_secret.mp4",
         :type => 'video/mp4',
         :disposition => 'inline'
+        elapsed=Time.now-start
+        logger.info "send_file took #{elapsed} seconds"
       end
     end
   end
