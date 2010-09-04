@@ -8,7 +8,8 @@ most complex secure one.
 
 1. Video delivered from /videos/public directory on the host 
    -- Baseline branch
-2. Video delivered from /videos/public using send_file in the controller
+2. Video delivered from /videos/public using send_file in the controller 
+   --send_file branch
 3. Video delivered from a remote url from inside  rails controller  The url remains hidden
 
 4. Video delivered from a query string authenticated Amazon S3 bucket from a rails controller

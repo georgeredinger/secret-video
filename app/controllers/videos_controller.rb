@@ -1,4 +1,5 @@
 class VideosController < ApplicationController
+
   # GET /videos
   # GET /videos.xml
   def index
@@ -14,7 +15,12 @@ class VideosController < ApplicationController
   # GET /videos/1.xml
   def show
     @video = Video.find(params[:id])
-
+    puts "delivery:#{@video.delivery}"
+    if @video.delivery == 'send_file'
+      @video.url = "/videos/#{params[:id]}/sendfile"
+    puts "delivery url :#{@video.url}"
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @video }
@@ -25,7 +31,6 @@ class VideosController < ApplicationController
   # GET /videos/new.xml
   def new
     @video = Video.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @video }
@@ -79,5 +84,10 @@ class VideosController < ApplicationController
       format.html { redirect_to(videos_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def sendfile
+    @video = Video.find(params[:id])
+    send_file "#{Rails.root}/public/videos/#{@video.url}"
   end
 end

@@ -25,9 +25,14 @@
   </div>
   <div class="field">
     <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    <%= f.text_area :description %>
+  </div>
+   <div class="field">
+    <%= f.label "delivery method" %><br />
+    <%= f.select :delivery, [:Baseline, :send_file] %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
