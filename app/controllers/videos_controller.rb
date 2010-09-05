@@ -15,8 +15,10 @@ class VideosController < ApplicationController
    # GET /videos/1.xml
    def show
       @video = Video.find(params[:id])
-      if @video.delivery == 'send_file'
-         @video.url = "/videos/#{params[:id]}/sendfile.mp4"
+      @video.url = case @video.delivery
+         when 'send_file' then   "/videos/#{params[:id]}/sendfile.mp4"
+         when 's3_public' then @video.url
+         else 'uh-ooh'
       end
       respond_to do |format|
          format.html # show.html.erb
