@@ -8,8 +8,6 @@
     <th>Description</th>
     <th>Delivery</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @videos.each do |video| %>
@@ -20,8 +18,6 @@
     <td><%= video.description %></td>
     <td><%= video.delivery %></td>
     <td><%= link_to 'Show', video %></td>
-    <td><%= link_to 'Edit', edit_video_path(video) %></td>
-    <td><%= link_to 'Destroy', video, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

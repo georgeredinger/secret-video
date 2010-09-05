@@ -4,5 +4,5 @@ Sv::Application.routes.draw do
       get :sendfile
     end
   end
-  match '/' =>  redirect("/videos/1")
+  match '/' =>  redirect("/videos")
 end
