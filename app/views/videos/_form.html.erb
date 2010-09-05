@@ -29,7 +29,7 @@
   </div>
    <div class="field">
     <%= f.label "delivery method" %><br />
-    <%= f.select :delivery, [:baseline, :send_file, :s3_public] %>
+    <%= f.select :delivery, [:baseline, :send_file, :s3_public,:s3_querystring] %>
   </div>
   <div class="actions">
     <%= f.submit %>

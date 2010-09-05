@@ -1,3 +1,4 @@
+require 'aws/s3'
 class VideosController < ApplicationController
 
    # GET /videos
@@ -16,8 +17,11 @@ class VideosController < ApplicationController
    def show
       @video = Video.find(params[:id])
       @video.url = case @video.delivery
+         when 'baseline' then   "/videos/#{@video.url}"
          when 'send_file' then   "/videos/#{params[:id]}/sendfile.mp4"
          when 's3_public' then @video.url
+         when 's3_querystring'  
+           AWS::S3::S3Object.url_for(@video.url,'georgeredinger')
          else 'uh-ooh'
       end
       respond_to do |format|
