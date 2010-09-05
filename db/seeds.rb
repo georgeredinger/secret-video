@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+vid = Video.create( :url => "nano.mp4", :title =>   "title", :owner =>   "owner", :description =>   "direct delivery", :delivery  => :Baseline)
+vid = Video.create( :url => "nano.mp4", :title =>   "title", :owner =>   "owner", :description =>   "send_file delivery", :delivery  => :send_file)

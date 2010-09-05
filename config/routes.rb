@@ -5,5 +5,4 @@ Sv::Application.routes.draw do
     end
   end
   match '/' =>  redirect("/videos/1")
-
 end
