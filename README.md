@@ -12,9 +12,9 @@ It demonstrates with a series of git branches each step from  a simplest, public
 
 2. Video delivered from /videos/public using send_file in the controller -- send_file branch
 
-3. Video delivered from a query string authenticated Amazon S3 bucket the url  is visible but is timed out in 5 minutes by Amazon [[s3_querystring branch]]
+3. Video delivered from a query string authenticated Amazon S3 bucket the url  is visible but is timed out in 5 minutes by Amazon --s3_querystring branch
 
-4. Video delivered from a remote url from inside  rails controller  The url remains hidden
+4. Video delivered from a remote url from inside  rails controller  The url remains hidden --s3-send_file-branch
 
 5. Video delivered from a query string authenticated Amazon S3 bucket from inside a rails controller over a ssl connection. Source url never exposed, delivered over ssl.
 
