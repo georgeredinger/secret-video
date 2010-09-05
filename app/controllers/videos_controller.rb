@@ -1,6 +1,6 @@
 require 'aws/s3'
+require 'open-uri'
 class VideosController < ApplicationController
-
    # GET /videos
    # GET /videos.xml
    def index
@@ -18,10 +18,21 @@ class VideosController < ApplicationController
       @video = Video.find(params[:id])
       @video.url = case @video.delivery
          when 'baseline' then   "/videos/#{@video.url}"
-         when 'send_file' then   "/videos/#{params[:id]}/sendfile.mp4"
+         when 'send_file' then 
+           @video.temp_file_name = "#{Rails.root}/public/videos/#{@video.url}"
+           @video.save
+           "/videos/#{params[:id]}/sendfile.mp4"
          when 's3_public' then @video.url
          when 's3_querystring'  
            AWS::S3::S3Object.url_for(@video.url,'georgeredinger')
+         when 's3_send_file'
+           @video.temp_file_name = remote_to_tmp(AWS::S3::S3Object.url_for(@video.url,'georgeredinger'))
+           @video.save
+           "/videos/#{params[:id]}/sendfile.mp4"
+         when 'url_send_file'
+           @video.temp_file_name = remote_to_tmp(@video.url)
+           @video.save
+           "/videos/#{params[:id]}/sendfile.mp4"
          else 'uh-ooh'
       end
       respond_to do |format|
@@ -93,7 +104,7 @@ class VideosController < ApplicationController
    def sendfile
       @video = Video.find(params[:id])
       respond_to do |format|
-         format.mp4 { send_file("#{Rails.root}/public/videos/#{@video.url}")}
+         format.mp4 { send_file(@video.temp_file_name)}
       end
    end
 end
