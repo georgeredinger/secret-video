@@ -24,7 +24,7 @@ class VideosController < ApplicationController
            "/videos/#{params[:id]}/sendfile.mp4"
          when 's3_public' then @video.url
          when 's3_querystring'  
-           AWS::S3::S3Object.url_for(@video.url,'georgeredinger')
+           AWS::S3::S3Object.url_for(@video.url,'georgeredinger',:expire_in=>10.seconds)
          when 's3_send_file'
            @video.temp_file_name = remote_to_tmp(AWS::S3::S3Object.url_for(@video.url,'georgeredinger'))
            @video.save
