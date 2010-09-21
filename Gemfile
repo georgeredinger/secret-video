@@ -30,3 +30,5 @@ gem 'aws-s3'
 #
   gem 'mysql'
 
+  gem 'newrelic_rpm' 
+  gem 'ruby-prof'

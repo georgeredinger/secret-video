@@ -12,6 +12,7 @@ vid = Video.create( :url => "nano-private.mp4", :title =>"cloud nano with timeou
 vid = Video.create( :url => "nano-private.mp4", :title =>"secret nano with timeout", :owner =>   "Secret Clouded Programmer", :description =>   "private (query string authentication) send_file delivery", :delivery  => :s3_send_file)
 vid = Video.create( :url => "http://georgeredinger.s3.amazonaws.com/nano.mp4", :title =>"video from remote url", :owner =>   "Secret Clouded Programmer", :description =>   "send a public url as a private file", :delivery  => :url_send_file)
 vid = Video.create( :url => "http://mirror.bigbuckbunny.de/peach/bigbuckbunny_movies/big_buck_bunny_720p_h264.mov", :title =>"big video from remote url", :owner =>   "Big Buck Bunny Rabbit", :description =>   "this could cause havoc with the tmp storage", :delivery  => :url_send_file)
-
+vid = Video.create( :url => "http://localhost/nano.mp4", :title =>"video from local url x-accel-redirect", :owner =>   "pretty Secret ", :description =>   "send a priviate file as a private file", :delivery  => :x_accel_redirect)
+vid = Video.create( :url => "http://localhost/nano.mp4", :title =>"video from remote url x-accel-redirect_remote", :owner =>   "very Secret Programmer", :description =>   "send a priviate url as a private file", :delivery  => :x_accel_redirect_remote)
 
 

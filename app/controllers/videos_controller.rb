@@ -16,6 +16,7 @@ class VideosController < ApplicationController
    # GET /videos/1.xml
    def show
       @video = Video.find(params[:id])
+      logger.debug "delivery is #{@video.delivery}"
       @video.url = case @video.delivery
          when 'baseline' then   "/videos/#{@video.url}"
          when 'send_file' then 
@@ -29,11 +30,16 @@ class VideosController < ApplicationController
            @video.temp_file_name = remote_to_tmp(AWS::S3::S3Object.url_for(@video.url,'georgeredinger'))
            @video.save
            "/videos/#{params[:id]}/sendfile.mp4"
-         when 'url_send_file'
+         when  'x_accel_redirect'
            @video.temp_file_name = remote_to_tmp(@video.url)
            @video.save
-           "/videos/#{params[:id]}/sendfile.mp4"
-         else 'uh-ooh'
+           "/videos/#{params[:id]}/download.mp4"
+         when  'x_accel_redirect_remote'
+           @video.temp_file_name = remote_to_tmp(@video.url)
+           @video.save
+           "/secret-video/nano.mp4"
+         else 
+            "ooh, noooo"
       end
       respond_to do |format|
          format.html # show.html.erb
@@ -101,10 +107,30 @@ class VideosController < ApplicationController
       end
    end
 
-   def sendfile
-      @video = Video.find(params[:id])
-      respond_to do |format|
-         format.mp4 { send_file(@video.temp_file_name)}
+  def download
+    @video = Video.find(params[:id])
+    delivery = @video.delivery
+    respond_to do |format|
+      format.mp4 do 
+        case delivery
+          when  'x_accel_redirect'
+            filename = '/home/george/workspace/sv/secret-video/nano.mp4'
+            response.headers['Content-Type'] = 'application/force-download'
+            response.headers['Content-Disposition'] = "attachment;filename=\"#{filename}\""
+            response.headers['X-Accel-Redirect'] = filename
+            render :nothing =>true
+          when  'x_accel_redirect_remote'
+            filename = '/secret-video/nano.mp4'
+            response.headers['Content-Type'] = 'application/force-download'
+            response.headers['Content-Disposition'] = "attachment;filename=\"#{filename}\""
+            response.headers['X-Accel-Redirect'] = filename
+            render :nothing =>true
+          else
+            woops
+        end
       end
-   end
+    end
+  end
+
 end
+
