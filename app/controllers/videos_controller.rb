@@ -18,7 +18,7 @@ class VideosController < ApplicationController
       @video = Video.find(params[:id])
       logger.debug "delivery is #{@video.delivery}"
       @video.url = case @video.delivery
-         when 'baseline' then   "/videos/#{@video.url}"
+         when /baseline/ then   "/videos/#{@video.url}"
          when 'send_file' then 
            @video.temp_file_name = "#{Rails.root}/public/videos/#{@video.url}"
            @video.save
@@ -30,15 +30,15 @@ class VideosController < ApplicationController
            @video.temp_file_name = remote_to_tmp(AWS::S3::S3Object.url_for(@video.url,'georgeredinger'))
            @video.save
            "/videos/#{params[:id]}/sendfile.mp4"
-         when  'x_accel_redirect'
-           @video.temp_file_name = remote_to_tmp(@video.url)
-           @video.save
-           "/videos/#{params[:id]}/download.mp4"
-         when  'x_accel_redirect_remote'
-           @video.temp_file_name = remote_to_tmp(@video.url)
-           @video.save
+        when  /x_accel_redirect_remote$/
+           #@video.temp_file_name = remote_to_tmp(@video.url)
+           #@video.save
            "/secret-video/nano.mp4"
-         else 
+        when  /x_accel_redirect$/
+           #@video.temp_file_name = remote_to_tmp(@video.url)
+           #@video.save
+           "/videos/#{params[:id]}/download.mp4"
+        else 
             "ooh, noooo"
       end
       respond_to do |format|
