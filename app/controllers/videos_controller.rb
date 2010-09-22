@@ -1,6 +1,19 @@
 require 'aws/s3'
 require 'open-uri'
+require 'valid_browser.rb'
 class VideosController < ApplicationController
+before_filter :restrict_browser
+include  ValidBrowser
+
+  def restrict_browser
+    unless valid_browser?
+      @user_agent = UserAgent.parse(request.user_agent)
+      @supported_browsers = SupportedBrowsers
+      render :action => 'bad_browser'
+      return false
+    end
+  end
+
    # GET /videos
    # GET /videos.xml
    def index

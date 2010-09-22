@@ -1,2 +1,2 @@
 class Video < ActiveRecord::Base
-end
+  end

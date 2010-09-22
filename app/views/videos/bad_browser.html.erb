@@ -1,0 +1,11 @@
+<h1>Incompatable Browser</h1>
+Your browser reports it's self to be: </br>
+<h2> <%= @user_agent %> </h2>
+
+This site only works with: </br>
+<ul>
+  <% @supported_browsers.each do |browser| %>
+    <li> <%="#{browser.browser} versions >= #{browser.version}"  %> </li>
+  <% end %>
+</ul> 
+
