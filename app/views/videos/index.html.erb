@@ -1,8 +1,8 @@
 <h1>Listing videos</h1>
 
-<table border="1">
+<table  border=1 width=800>
   <tr>
-    <th>Url</th>
+    <th width="25%">Url </th>
     <th>Title</th>
     <th>Owner</th>
     <th>Description</th>
@@ -12,7 +12,7 @@
 
 <% @videos.each do |video| %>
   <tr>
-    <td><%= video.url %></td>
+    <td> <%= video.url %></td>
     <td><%= video.title %></td>
     <td><%= video.owner %></td>
     <td><%= video.description %></td>

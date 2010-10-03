@@ -13,6 +13,7 @@ vid = Video.create( :url => "nano-private.mp4", :title =>"secret nano with timeo
 vid = Video.create( :url => "http://georgeredinger.s3.amazonaws.com/nano.mp4", :title =>"video from remote url", :owner =>   "Secret Clouded Programmer", :description =>   "send a public url as a private file", :delivery  => :url_send_file)
 vid = Video.create( :url => "http://mirror.bigbuckbunny.de/peach/bigbuckbunny_movies/big_buck_bunny_720p_h264.mov", :title =>"big video from remote url", :owner =>   "Big Buck Bunny Rabbit", :description =>   "this could cause havoc with the tmp storage", :delivery  => :url_send_file)
 vid = Video.create( :url => "http://localhost/nano.mp4", :title =>"video from local url x-accel-redirect", :owner =>   "pretty Secret ", :description =>   "send a priviate file as a private file", :delivery  => :x_accel_redirect)
-vid = Video.create( :url => "http://localhost/nano.mp4", :title =>"video from remote url x-accel-redirect_remote", :owner =>   "very Secret Programmer", :description =>   "send a priviate url as a private file", :delivery  => :x_accel_redirect_remote)
+vid = Video.create( :url => "http://localhost/nano.mp4", :title =>"video from remote url x-accel-redirect_remote", :owner =>   "very Secret Programmer", :description =>   "send a priviate url as a private file", :delivery  => :x_accel_redirect_remote_localhost)
+vid = Video.create( :url => "http://s3.amazonaws.com/georgeredinger/oggnano.ogv", :title =>"video from s3 url via x-accel-redirect", :owner =>   "very Secret Programmer", :description =>   "send a priviate url as a private file", :delivery  => :x_accel_redirect_remote_s3)
 
 
