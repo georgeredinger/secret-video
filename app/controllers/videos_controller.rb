@@ -55,7 +55,7 @@ class VideosController < ApplicationController
       host = $1
       bucket = $2
       file = $3
-      url = AWS::S3::S3Object.url_for(file,bucket,:expire_in=>10.seconds)
+      url = AWS::S3::S3Object.url_for(file,bucket,:expire_in=>60.seconds)
       secret_url=url.gsub("http://",'')
       @video.temp_file_name = secret_url
       @video.save
