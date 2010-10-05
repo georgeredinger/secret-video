@@ -31,6 +31,10 @@
     <%= f.label "delivery method" %><br />
     <%= f.select :delivery, [:baseline, :send_file, :s3_public,:s3_querystring,:s3_send_file,:url_send_file,:x_accel_redirect,:x_accel_redirect_remote_localhost,:x_accel_redirect_remote_s3] %> 
   </div>
+    <div class="field">
+    <%= f.label "player" %><br />
+    <%= f.select :player, [:html5, :flowplayer,:jw_player,:youtube,:vimeo] %> 
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

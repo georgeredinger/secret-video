@@ -1,12 +1,13 @@
 <h1>Listing videos</h1>
 
-<table  border=1 width=800>
+<table  border=1 width=100%>
   <tr>
-    <th width="25%">Url </th>
+    <th>Url </th>
     <th>Title</th>
     <th>Owner</th>
     <th>Description</th>
     <th>Delivery</th>
+    <th>Player</th>
     <th></th>
   </tr>
 
@@ -17,6 +18,7 @@
     <td><%= video.owner %></td>
     <td><%= video.description %></td>
     <td><%= video.delivery %></td>
+    <td><%= video.player %></td>
     <td><%= link_to 'Play', video %></td>
   </tr>
 <% end %>

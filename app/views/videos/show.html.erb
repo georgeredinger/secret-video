@@ -22,9 +22,17 @@
 <p>
   <b>Delivery:</b>
   <%= @video.delivery %>
+  </p>
+  <p>
+  <b>player:</b>
+  <%= @video.player %>
 </p>
 
-<%= video_tag @video.url,:controls=>true,:height=>'480',:width=>'640' %>
+<div style="width:640px;height:480px;" id="video">
+  <%= show_video @video %>
+</div>
+<script>
+        flowplayer("player", "/flowplayer/flowplayer-3.2.5.swf");
+</script>
 
-<%= link_to 'Edit', edit_video_path(@video) %> |
 <%= link_to 'Back', videos_path %>
