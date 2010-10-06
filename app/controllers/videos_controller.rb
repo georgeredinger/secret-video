@@ -42,14 +42,18 @@ class VideosController < ApplicationController
       @video.temp_file_name = remote_to_tmp(AWS::S3::S3Object.url_for(@video.url,'georgeredinger'))
       @video.save
       "/videos/#{params[:id]}/sendfile.mp4"
-    when  /x_accel_redirect_remote$/
-      #@video.temp_file_name = remote_to_tmp(@video.url)
-      #@video.save
-      "/private-video/nano.mp4"
-    when  /x_accel_redirect$/
-      #@video.temp_file_name = remote_to_tmp(@video.url)
-      #@video.save
-      "/videos/#{params[:id]}/download.mp4"
+#    when  /x_accel_redirect_remote$/
+#      #@video.temp_file_name = remote_to_tmp(@video.url)
+#      #@video.save
+#      "/private-video/nano.mp4"
+#    when  /x_accel_redirect$/
+#      #@video.temp_file_name = remote_to_tmp(@video.url)
+#      #@video.save
+#      "/videos/#{params[:id]}/download.mp4"
+    when  'x_accel_redirect_remote_localhost'
+      @video.temp_file_name = @video.url.gsub("http://","")
+      @video.save
+     "/videos/#{params[:id]}/download.mp4"
     when  'x_accel_redirect_remote_s3'
       @video.url.gsub("http://","")  =~ /(.*)\/(.*)\/(.*)/
       host = $1
@@ -143,7 +147,13 @@ class VideosController < ApplicationController
           response.headers['Content-Disposition'] = "attachment;filename=\"#{filename}\""
           response.headers['X-Accel-Redirect'] = full_path
           render :nothing =>true
-        when  'x_accel_redirect_remote'
+        when  'x_accel_redirect_remote_localhost'
+          response.headers['Content-Type'] = 'application/force-download'
+          response.headers['Content-Disposition'] = "attachment;filename=\"filename\""
+          response.headers['X-Accel-Redirect'] = "/url_redirect/#{@video.temp_file_name}"
+          logger.info "x_accel_redirect_remote_localhost download #{response.headers['X-Accel-Redirect']}"
+          render :nothing =>true
+         when  'x_accel_redirect_remote'
           #filename = '/secret-video/nano.mp4'
           filename = '/home/george/workspace/sv/secret-video/nano.mp4'
           response.headers['Content-Type'] = 'application/force-download'
