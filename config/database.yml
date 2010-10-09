@@ -7,10 +7,14 @@ development:
   socket: "/var/run/mysqld/mysqld.sock"
 
 test:
-  adapter: sqlite3
-  database: db/test.sqlite3
+  adapter: mysql
+  database: svid_test
   pool: 5
-  timeout: 5000
+  username: root 
+  password: george
+  socket: "/var/run/mysqld/mysqld.sock"
+
+timeout: 5000
 
 production:
   adapter: mysql

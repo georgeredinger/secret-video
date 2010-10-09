@@ -1,5 +1,8 @@
 .bundle
 db/*.sqlite3
+*.ogg
+*.mp4
+*.ogv
 log/*.log
 tmp/**/*
 config/database.yml

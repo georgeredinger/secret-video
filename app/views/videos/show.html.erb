@@ -1,3 +1,4 @@
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -28,11 +29,37 @@
   <%= @video.player %>
 </p>
 
-<div style="width:640px;height:480px;" id="video">
+<div style="width:640px;height:480px;" id="vid">
   <%= show_video @video %>
 </div>
-<script>
-        flowplayer("player", "/flowplayer/flowplayer-3.2.5.swf");
-</script>
-
+<script type="text/javascript">
+  $(document).ready(function() {
+    console.log("I'm ready darling!");
+<% if @video.player == "flowplayer" %>
+       flowplayer("player", "/flowplayer/flowplayer-3.2.5.swf");
+       flowplayer("player", "/flowplayer/flowplayer-3.2.5.swf", {
+       clip: { 
+        autoPlay: true,
+         onStart: function() {
+         console.log('flowplayer started'); 
+         this.unload();
+         },
+         onFinish: function() {
+         console.log('flowplayer finished');
+         }
+         }
+     });
+<% else %>
+       $('video').bind('play',function(){
+          console.log('html5 video play');
+        });
+      $('video').bind('ended',function(){
+          console.log('html5 video end');
+        });
+      
+<% end %>
+     });
+ </script>
 <%= link_to 'Back', videos_path %>
+
+

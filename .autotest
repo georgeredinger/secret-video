@@ -1,0 +1,4 @@
+require 'redgreen/autotest'
+require "test_notifier/autotest"
+require 'autotest/timestamp'
+
