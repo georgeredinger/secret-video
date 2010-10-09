@@ -1,6 +1,8 @@
 module VideosHelper
   def show_video(video)
+    vids =  ActiveSupport::JSON.decode video.url
     case video.player
+
     when 'flowplayer'
      flowplay =<<FLOW
      <a  id="player"
@@ -12,7 +14,27 @@ module VideosHelper
 FLOW
      raw flowplay
     when 'html5'
-      raw "<video id=\"theVideo\" controls=\"controls\" height=\"480\" src=\"#{video.url}\" width=\"640\" > </video>"
+      case video.delivery
+      when "baseline"
+        html5 = %q{<video style="border:1px solid black;width:445px;height:250px" preload="none" controls>}
+        vids.each do |v|
+        html5 += "<source src=\"#{v}\";" 
+        case v
+          when /\.ogg/
+            html5 += ' type = "video/ogv"'
+          when /\.m4v/
+            html5 += ' type = "video/mp4"'
+          when /\.webm/
+            html5 += ' type = "video/webm"'
+        end
+
+        html5+=">"
+        end
+        html5+="</video>"
+        raw html5
+      else
+        raw "<video id=\"theVideo\" controls=\"controls\" height=\"480\" src=\"#{video.url}\" width=\"640\" > </video>"
+      end
     end
   end
 

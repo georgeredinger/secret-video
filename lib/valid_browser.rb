@@ -42,7 +42,7 @@ module ValidBrowser
     Browser.new("Safari", "3.1.1"),
     Browser.new("Firefox", "2.0.0.14"),
     Browser.new("Internet Explorer", "9.0"),
-    Browser.new("Chrome", "6.0")
+    Browser.new("Chrome", "6.0"),
   ]
 
   protected

@@ -30,9 +30,10 @@ class VideosController < ApplicationController
   def show
     @video = Video.find(params[:id])
     @video.url = case @video.delivery
-    when /baseline/ then   "/videos/#{@video.url}"
+    when /baseline/ then
+      @video.url
     when 'send_file' then
-      @video.temp_file_name = "#{Rails.root}/public/videos/#{@video.url}"
+      @video.temp_file_name = "#{Rails.root}/public/vids/#{@video.url}"
       @video.save
       "/videos/#{params[:id]}/sendfile.mp4"
     when 's3_public' then @video.url
