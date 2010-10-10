@@ -31,10 +31,14 @@ gem 'aws-s3'
   gem 'mysql'
   gem 'newrelic_rpm' 
   gem 'ruby-prof'
-
+  gem 'ParseUserAgent'
 group :test,:development do  
   gem "rspec-rails",        ">= 2.0.0.beta.10", :git => "git://github.com/rspec/rspec-rails.git"
   gem "capybara"
+  gem "database_cleaner"
+  gem "cucumber-rails"
+  gem "cucumber"
+  gem "launchy"
 end
 
 

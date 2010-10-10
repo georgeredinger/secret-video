@@ -6,7 +6,7 @@ development:
   password: snackfood
   socket: "/var/run/mysqld/mysqld.sock"
 
-test:
+test: &test
   adapter: mysql
   database: svid_test
   pool: 5
@@ -24,3 +24,6 @@ production:
   password: meat_and_potatoes
   socket: "/var/run/mysqld/mysqld.sock"
 
+
+cucumber:
+  <<: *test

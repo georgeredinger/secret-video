@@ -6,6 +6,7 @@ class UserAgent
       end
 
       GeckoBrowsers = %w(
+        Firefox-4.0
         Firefox
         Camino
         Iceweasel

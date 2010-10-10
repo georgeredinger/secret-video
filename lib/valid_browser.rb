@@ -1,4 +1,5 @@
 module ValidBrowser
+  require 'parse_user_agent'
   # Browser restrictor
   # 
   # You can choose whether to just display a warning,
@@ -41,6 +42,7 @@ module ValidBrowser
   SupportedBrowsers = [
     Browser.new("Safari", "3.1.1"),
     Browser.new("Firefox", "2.0.0.14"),
+    Browser.new("Firefox-4.0", "4.0"),
     Browser.new("Internet Explorer", "9.0"),
     Browser.new("Chrome", "6.0"),
   ]
@@ -49,6 +51,13 @@ module ValidBrowser
   
     def valid_browser?
       return if request.user_agent.blank?
+#      agent=ParseUserAgent.new
+#      agent_parts=agent.parse(request.user_agent)
+#      logger.info "browser:#{agent_parts.browser}"
+#      logger.info "browser version:#{agent_parts.browser_version_major}"
+#      logger.info "os:"#{agent_parts.ostype}"
+#      logger.info "os version:#{agent_parts.os_version}"
+#
       user_agent = UserAgent.parse(request.user_agent)
       SupportedBrowsers.detect { |browser| user_agent >= browser }
     end
