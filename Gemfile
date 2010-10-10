@@ -31,11 +31,10 @@ gem 'aws-s3'
   gem 'mysql'
   gem 'newrelic_rpm' 
   gem 'ruby-prof'
-  
-#  gem "rspec-rails",        ">= 2.0.0.beta.10", :git => "git://github.com/rspec/rspec-rails.git"
-#  gem "rspec",              ">= 2.0.0.beta.10", :git => "git://github.com/rspec/rspec.git"
-#  gem "rspec-core",         ">= 2.0.0.beta.10", :git => "git://github.com/rspec/rspec-core.git"
-#  gem "rspec-expectations", ">= 2.0.0.beta.10", :git => "git://github.com/rspec/rspec-expectations.git"
-#  gem "rspec-mocks",        ">= 2.0.0.beta.10", :git => "git://github.com/rspec/rspec-mocks.git"
+
+group :test,:development do  
+  gem "rspec-rails",        ">= 2.0.0.beta.10", :git => "git://github.com/rspec/rspec-rails.git"
+  gem "capybara"
+end
 
 
