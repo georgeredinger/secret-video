@@ -17,7 +17,7 @@ class VideosController < ApplicationController
   # GET /videos/  
   # GET /videos.xml
   def index
-    @videos = Video.all
+    @videos = Video.find(:all, :order => "delivery")
     
     respond_to do |format|
       format.html # index.html.erb
