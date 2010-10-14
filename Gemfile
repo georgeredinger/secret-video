@@ -34,11 +34,13 @@ gem 'aws-s3'
   gem 'ParseUserAgent'
 group :test,:development do  
   gem "rspec-rails",        ">= 2.0.0.beta.10", :git => "git://github.com/rspec/rspec-rails.git"
+  gem "rspec",        ">= 2.0.0.beta.10"
   gem "capybara"
-  gem "database_cleaner"
+#  gem "database_cleaner"
   gem "cucumber-rails"
   gem "cucumber"
   gem "launchy"
+  gem "webrat"
 end
 
 

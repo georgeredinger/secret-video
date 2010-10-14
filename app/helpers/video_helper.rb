@@ -1,4 +1,4 @@
-module VideosHelper
+module VideoHelper
   def show_video(video)
     vids =  ActiveSupport::JSON.decode video.url
     case video.player

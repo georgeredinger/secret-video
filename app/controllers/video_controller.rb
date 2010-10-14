@@ -1,7 +1,7 @@
 require 'aws/s3'
 require 'open-uri'
 require 'valid_browser.rb'
-class VideosController < ApplicationController
+class VideoController < ApplicationController
   before_filter :restrict_browser
   include  ValidBrowser
   
@@ -14,19 +14,19 @@ class VideosController < ApplicationController
     end
   end
   
-  # GET /videos/  
-  # GET /videos.xml
+  # GET /video/  
+  # GET /video.xml
   def index
-    @videos = Video.find(:all, :order => "delivery")
+    @video = Video.find(:all, :order => "delivery")
     
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @videos }
+      format.xml  { render :xml => @video }
     end
   end
   
-  # GET /videos/1
-  # GET /videos/1.xml
+  # GET /video/1
+  # GET /video/1.xml
   def show
     @video = Video.find(params[:id])
     @video.url = case @video.delivery
@@ -35,14 +35,14 @@ class VideosController < ApplicationController
     when 'send_file' then
       @video.temp_file_name = "#{Rails.root}/public/vids/#{@video.url}"
       @video.save
-      "/videos/#{params[:id]}/sendfile.mp4"
+      "/video/#{params[:id]}/sendfile.mp4"
     when 's3_public' then @video.url
     when 's3_querystring'
       AWS::S3::S3Object.url_for(@video.url,'georgeredinger',:expire_in=>10.seconds)
     when 's3_send_file'
       @video.temp_file_name = remote_to_tmp(AWS::S3::S3Object.url_for(@video.url,'georgeredinger'))
       @video.save
-      "/videos/#{params[:id]}/sendfile.mp4"
+      "/video/#{params[:id]}/sendfile.mp4"
 #    when  /x_accel_redirect_remote$/
 #      #@video.temp_file_name = remote_to_tmp(@video.url)
 #      #@video.save
@@ -50,11 +50,11 @@ class VideosController < ApplicationController
 #    when  /x_accel_redirect$/
 #      #@video.temp_file_name = remote_to_tmp(@video.url)
 #      #@video.save
-#      "/videos/#{params[:id]}/download.mp4"
+#      "/video/#{params[:id]}/download.mp4"
     when  'x_accel_redirect_remote_localhost'
       @video.temp_file_name = @video.url.gsub("http://","")
       @video.save
-     "/videos/#{params[:id]}/download.mp4"
+     "/video/#{params[:id]}/download.mp4"
     when  'x_accel_redirect_remote_s3'
       @video.url.gsub("http://","")  =~ /(.*)\/(.*)\/(.*)/
       host = $1
@@ -64,7 +64,7 @@ class VideosController < ApplicationController
       secret_url=url.gsub("http://",'')
       @video.temp_file_name = secret_url
       @video.save
-      "/videos/#{params[:id]}/download.mp4"
+      "/video/#{params[:id]}/download.mp4"
     else
       "ooh, noooo"
     end
@@ -74,8 +74,8 @@ class VideosController < ApplicationController
     end
   end
   
-  # GET /videos/new
-  # GET /videos/new.xml
+  # GET /video/new
+  # GET /video/new.xml
   def new
     #@video = Video.new
     respond_to do |format|
@@ -84,13 +84,13 @@ class VideosController < ApplicationController
     end
   end
   
-  # GET /videos/1/edit
+  # GET /video/1/edit
   def edit
     # @video = Video.find(params[:id])
   end
   
-  # POST /videos
-  # POST /videos.xml
+  # POST /video
+  # POST /video.xml
   def create
     # @video = Video.new(params[:video])
     
@@ -105,8 +105,8 @@ class VideosController < ApplicationController
     end
   end
   
-  # PUT /videos/1
-  # PUT /videos/1.xml
+  # PUT /video/1
+  # PUT /video/1.xml
   def update
     # @video = Video.find(params[:id])
     
@@ -121,14 +121,14 @@ class VideosController < ApplicationController
     end
   end
   
-  # DELETE /videos/1
-  # DELETE /videos/1.xml
+  # DELETE /video/1
+  # DELETE /video/1.xml
   def destroy
     #  @video = Video.find(params[:id])
     #  @video.destroy
     
     respond_to do |format|
-      format.html { redirect_to(videos_url) }
+      format.html { redirect_to(video_url) }
       format.xml  { head :ok }
     end
   end

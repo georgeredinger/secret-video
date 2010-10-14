@@ -1,5 +1,5 @@
 # Load the rails application
-Gem.clear_paths
+#Gem.clear_paths
 ENV['GEM_PATH']= File.expand_path('~/.rvm/gems/ree-1.8.7-2010.02')
 require 'rubygems'
 # Set up gems listed in the Gemfile.

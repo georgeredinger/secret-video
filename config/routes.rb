@@ -1,13 +1,15 @@
+STATIC_PAGES = %w(about home)
+STATIC_REGEXP = %r{#{STATIC_PAGES.join("|")}}
+
 Sv::Application.routes.draw do
-
   get "page/show"
+  match ":page", :to => "page#show" ,:constraints => {:page => STATIC_REGEXP}
+  root :to => "page#home"
 
-  resources :videos do
+  resources :video do
+    match "video", :to => "video#index",:as => "video"
     member do
       get :download
     end
   end
- # match '/' =>  redirect("/videos")
-  match ":page", :to => "page#show"
-  root :to => "page#show"
-end
+  end
