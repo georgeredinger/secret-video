@@ -2,13 +2,17 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag :all %>
   <%= csrf_meta_tag %>
   <title>Secret Video</title>
 </head>
 <body>
-  <h1 id="header"> Secret Video </h1>
-  <br/>
+  <div  id="header">
+  <h1 > 
+    <div id="overlap"> <img src="images/ts.png" height="200px"> </div> 
+    Secret Video
+  </h1>
+</div>
   <div id="nav">
     <ul>
       <li> <%= link_to 'Home', '/' %></li>
@@ -28,6 +32,14 @@
         <a href="http://sv.redinger.me/">Secret Video</a>
       </p>
     </div>
+    <script type='text/javascript'>
+      $(document).ready(function(){
+          $("img").mouseover(function() { 
+            $('#overlap').fadeOut('slow', function() { });
+            });
+     });
+</script>
+
   </body>
 </html>
 
