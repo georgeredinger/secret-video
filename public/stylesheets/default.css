@@ -5,6 +5,9 @@
 html,body {
   height: 100%;
   background: #3AA6D0;
+  background: -moz-linear-gradient(top, #1E5799 0%, #2989D8 50%, #7db9e8 100%); /* firefox */
+  background: -webkit-gradient(linear, left 20deg top, left bottom, color-stop(0%,#1E5799), color-stop(50%,#2989D8), color-stop(100%,#7db9e8)); /* webkit */ 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1E5799', endColorstr='#7db9e8',GradientType=0 ); /* ie */
 }
 
 
@@ -17,9 +20,12 @@ margin: 0 auto -42px; /* the bottom margin is the negative value of the footer's
 
 .footer, .push {
   height: 42px
-  background: #569700;
   text-align: center;
-  margin-bottom:10px;
+  //margin-bottom:10px;
+  background: #a9e4f7; /* old browsers */
+  background: -moz-linear-gradient(top, #a9e4f7 0%, #0fb4e7 100%); /* firefox */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9e4f7), color-stop(100%,#0fb4e7)); /* webkit */ 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9e4f7', endColorstr='#0fb4e7',GradientType=0 ); /* ie */
 }
 
 li {
@@ -35,7 +41,7 @@ ul#nav li a:hover,ul#nav li a:active {
 #header {
 position:relative;
 width: 100%;
-background:#06799F;
+//background:#06799F;
 margin-left:20px 
 margin-bottom:15px;
 text-align: left;
@@ -47,6 +53,10 @@ font-weight: normal;
 text-transform: normal;
 letter-spacing: normal;
 line-height: 1.3em;
+//background: #1E5799; /* old browsers */
+background: -moz-linear-gradient(top, #1E5799 0%, #2989D8 50%, #207cca 51%, #7db9e8 100%); /* firefox */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1E5799), color-stop(50%,#2989D8), color-stop(51%,#207cca), color-stop(100%,#7db9e8)); /* webkit */ 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1E5799', endColorstr='#7db9e8',GradientType=0 ); /* ie */
 }
 
 #overlap {
@@ -117,6 +127,15 @@ table tr.odd { background-color:#61B4CF;}
   margin-right:75px;
   background-color:skyblue;
   border-radius: 15px;
+}
+
+.video {
+  width:640px;
+  margin-left:75px;
+  margin-right:75px;
+  background-color:skyblue;
+  border-radius: 15px;
+  padding:40px;
 }
 
 .text p,ul,h3 { margin-bottom:15px;margin-left:15px;margin-right:15px;}

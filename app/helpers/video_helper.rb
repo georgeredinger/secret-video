@@ -16,7 +16,7 @@ FLOW
     when 'html5'
       case video.delivery
       when "baseline"
-        html5 = %q{<video style="border:1px solid black;width:445px;height:250px" preload="none" controls>}
+        html5 = %q{<video style="border:1px solid black;width:640px;height:480px" preload="none" controls>}
         vids.each do |v|
         html5 += "<source src=\"#{v}\";" 
         case v
