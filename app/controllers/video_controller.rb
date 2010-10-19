@@ -2,7 +2,7 @@ require 'aws/s3'
 require 'open-uri'
 require 'valid_browser.rb'
 class VideoController < ApplicationController
-  before_filter :restrict_browser
+#  before_filter :restrict_browser
   include  ValidBrowser
   
   def restrict_browser
@@ -95,7 +95,7 @@ class VideoController < ApplicationController
     # @video = Video.new(params[:video])
     
     respond_to do |format|
-      if @video.save
+     if @video.save
         format.html { redirect_to(@video, :notice => 'Video was successfully created.') }
         format.xml  { render :xml => @video, :status => :created, :location => @video }
       else
@@ -111,6 +111,7 @@ class VideoController < ApplicationController
     # @video = Video.find(params[:id])
     
     respond_to do |format|
+
       if @video.update_attributes(params[:video])
         format.html { redirect_to(@video, :notice => 'Video was successfully updated.') }
         format.xml  { head :ok }
@@ -138,7 +139,7 @@ class VideoController < ApplicationController
     @video = Video.find(params[:id])
     delivery = @video.delivery
     respond_to do |format|
-      format.mp4 do
+     format.mp4 do
         case delivery
         when  'x_accel_redirect'
           filename='oggnano.ogv'
@@ -172,6 +173,14 @@ class VideoController < ApplicationController
         end
       end
     end
-  end
-end
+    end
 
+ def notplayed
+   logger.info "#{request.user_agent} did not play"
+ end
+
+ def played
+   logger.info "#{request.user_agent} did played"
+ end
+
+end

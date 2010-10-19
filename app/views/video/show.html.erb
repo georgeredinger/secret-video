@@ -6,9 +6,27 @@
     <%= show_video @video %>
   </div>
 </div>
+<div id="diditwork">
+  <button id="played"> Played</button>
+  <button id="notplayed"> Did not Play</button>
+
+</div>
+
 <script type="text/javascript">
   $(document).ready(function() {
     console.log("I'm ready darling!");
+       $("#played").click(function() { 
+            $('#played').text('Thanks');
+            $('#notplayed').fadeOut('slow', function() { });
+            $.get("/stats/<%=@video.id%>/played",{});
+            });
+  $("#notplayed").click(function() { 
+            $('#played').text('Thanks');
+            $('#notplayed').fadeOut('slow', function() { });
+            $.get("/stats/<%=@video.id%>}/notplayed",{});
+            });
+
+
 <% if @video.player == "flowplayer" %>
        flowplayer("player", "/flowplayer/flowplayer-3.2.5.swf");
        flowplayer("player", "/flowplayer/flowplayer-3.2.5.swf", {

@@ -9,12 +9,18 @@
 
 Video.delete_all
 
-[:baseline, :send_file, :s3_public,:s3_querystring,:s3_send_file,:url_send_file,:x_accel_redirect,:x_accel_redirect_remote_localhost,:x_accel_redirect_remote_s3].each do |delivery|
+[:baseline, :send_file].each  do |delivery|
    vid = Video.create( :url => "[\"/vids/Chrome_ImF.ogv\",\"/vids/Chrome_ImF.mp4\",\"/vids/Chrome_ImF.webm\"]", :title =>   "google 3 kinds ", :owner =>   "Programmer", :description =>   "#{delivery}", :delivery  => delivery, :player =>:html5)
 end
 
-[:baseline, :send_file, :s3_public,:s3_querystring,:s3_send_file,:url_send_file,:x_accel_redirect,:x_accel_redirect_remote_localhost,:x_accel_redirect_remote_s3].each do |delivery|
+
+[:baseline, :send_file].each do |delivery|
   vid = Video.create( :url => "/vids/trailer_400p.flv", :title =>   "flash", :owner =>   "Another Programmer", :description =>   "baseline delivery", :delivery  => delivery, :player =>:flowplayer)
 end
+
+#[:baseline, :send_file, :s3_public,:s3_querystring,:s3_send_file,:url_send_file,:x_accel_redirect,:x_accel_redirect_remote_localhost,:x_accel_redirect_remote_s3].each do |delivery|
+#   vid = Video.create( :url => "[\"/vids/Chrome_ImF.ogv\",\"/vids/Chrome_ImF.mp4\",\"/vids/Chrome_ImF.webm\"]", :title =>   "google 3 kinds ", :owner =>   "Programmer", :description =>   "#{delivery}", :delivery  => delivery, :player =>:html5)
+#end
+
 
 

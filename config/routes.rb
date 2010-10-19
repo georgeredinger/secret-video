@@ -2,6 +2,14 @@ STATIC_PAGES = %w(about home)
 STATIC_REGEXP = %r{#{STATIC_PAGES.join("|")}}
 
 Sv::Application.routes.draw do
+
+  resources :stats do
+    member do
+      get :played
+      get :notplayed
+    end
+ end
+
   get "page/show"
   match ":page", :to => "page#show" ,:constraints => {:page => STATIC_REGEXP}
   root :to => "page#home"
