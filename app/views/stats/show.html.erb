@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User agent:</b>
+  <%= @stat.user_agent %>
+</p>
+
+<p>
+  <b>Success:</b>
+  <%= @stat.success %>
+</p>
+
+<p>
+  <b>Failure:</b>
+  <%= @stat.failure %>
+</p>
+
+
+<%= link_to 'Edit', edit_stat_path(@stat) %> |
+<%= link_to 'Back', stats_path %>

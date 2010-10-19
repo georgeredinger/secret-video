@@ -1,0 +1,29 @@
+<%= form_for(@stat) do |f| %>
+  <% if @stat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stat.errors.count, "error") %> prohibited this stat from being saved:</h2>
+
+      <ul>
+      <% @stat.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_agent %><br />
+    <%= f.text_field :user_agent %>
+  </div>
+  <div class="field">
+    <%= f.label :success %><br />
+    <%= f.text_field :success %>
+  </div>
+  <div class="field">
+    <%= f.label :failure %><br />
+    <%= f.text_field :failure %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

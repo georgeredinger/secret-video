@@ -1,0 +1,26 @@
+<h1>Listing stats</h1>
+
+<table class="full">
+  <tr>
+    <th>User agent</th>
+    <th>File name </th>
+    <th>Player</th>
+    <th>Delivery</th>
+    <th>Success</th>
+    <th>Failure</th>
+  </tr>
+
+<% @stats.each do |stat| %>
+  <tr class="<%= cycle("even", "odd") %>" >
+    <td><%= stat.user_agent %></td>
+    <td><%= stat.file_name %></td>
+    <td><%= stat.player %></td>
+    <td><%= stat.delivery %></td>
+    <td><%= stat.success %></td>
+    <td><%= stat.failure %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
